@@ -1,4 +1,4 @@
-require_relative 'operators/ror'
+require_relative 'operators/lcr'
 
 #AOR Arithmetic Operator Replacement
 #BNR Break Next Replacement
@@ -7,6 +7,8 @@ require_relative 'operators/ror'
 #ROR Relation Operator Replacement
 
 #LCR Logical Connector Replacement
+
+
 #AMC Access Modifier Change
 #IOD Inheritance: Overriding Method Deletion
 #DFR Dangerous Function Replacement
