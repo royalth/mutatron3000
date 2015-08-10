@@ -1,21 +1,16 @@
-require 'parser/current'
-require_relative 'operators'
+require_relative "mutatron"
 
-filename = ARGV[0]
-mutatron = ARGV[1]
+filename 	= ARGV[0]
+mutator 	= ARGV[1]
 
-if filename == nil || mutatron == nil
+if filename == nil || mutator == nil
 	puts "You forgot about file name and mutation operator!"
 	exit
 end
 
-buffer 	= Parser::Source::Buffer.new(filename).read
-parser 	= Parser::CurrentRuby.new
-ast      = parser.parse(buffer)
+mutatron = Mutatron.new(filename, mutator)
+mutated = mutatron.mutate
 
-mutatron = Kernel.const_get(mutatron).new
-
-mutated = mutatron.rewrite(buffer, ast)
-File.open("mut_" + buffer.name, 'w') {|f| f.write(mutated) }
+File.open("mut_" + filename, 'w') {|f| f.write(mutated) }
 
 puts "done!"

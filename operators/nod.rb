@@ -1,12 +1,15 @@
-require 'parser/current'
+require '../mutator'
 
 #NOD Negation Operator Deletion
-class NOD < Parser::Rewriter
-	def on_send(node) 
-		if node.loc.selector.source == "not" || node.loc.selector.source == "!"
-			remove node.loc.selector
+class NOD < Mutator
+	def on_send(node)
+		if ['not', '!'].includes? node.loc.selector.source
+			work(node)
 		end
 		super
 	end
+	
+	def doMutate(node)
+		remove node.loc.selector
+	end
 end
-

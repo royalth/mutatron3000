@@ -1,4 +1,4 @@
-require_relative '../mutator'
+require_relative 'mutator'
 
 # BNR Break Next Replacement
 

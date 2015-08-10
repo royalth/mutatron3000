@@ -1,14 +1,22 @@
-require 'parser/current'
+require '../mutator'
 
 #LCR Logical Connector Replacement
-class LCR < Parser::Rewriter 
+class LCR < Mutator
 	def on_and(node)
-		replace node.location.operator, '||'
+		work(node)
 		super
 	end
+	
 	def on_or(node)
-		replace node.location.operator, '&&'
+		work(node)
 		super
+	end
+
+	def doMutate(node)
+		if ['and', '&&'].includes? node.location.operator.source
+			replace node.location.operator, '||'
+		else 
+			replace node.location.operator, '&&'
+		end
 	end
 end
-
