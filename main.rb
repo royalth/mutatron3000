@@ -11,6 +11,6 @@ end
 mutatron = Mutatron.new(filename, mutator)
 mutated = mutatron.mutate
 
-File.open("mut_" + filename, 'w') {|f| f.write(mutated) }
+File.open( filename + '_mut', 'w') {|f| f.write(mutated) }
 
 puts "done!"

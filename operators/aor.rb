@@ -1,17 +1,20 @@
-require 'replacements'
+require_relative 'replacements'
 
 # AOR Arithmetic Operator Replacement
 
 class AOR < OR
-	@ops = ['+' , '-', '*' , '/', '**', '%']
-	@rep = {
-		'+' 	=> ['-'], 
-		'-' 	=> ['+'],
-		'*'		=> ['/', '**'], 
-		'/' 	=> ['*' , '%'],
-		'**'	=> ['*'], 
-		'%'		=> ['/' , '*']
-	}
+	def initialize 
+		@ops = ['+' , '-', '*' , '/', '**', '%']
+		@rep = {
+			'+' 	=> ['-'], 
+			'-' 	=> ['+'],
+			'*'		=> ['/', '**'], 
+			'/' 	=> ['*' , '%'],
+			'**'	=> ['*'], 
+			'%'		=> ['/' , '*']
+		}
+		super 
+	end
 end
 
 

@@ -1,4 +1,4 @@
-require '../mutator'
+require_relative '../mutator'
 
 #LCR Logical Connector Replacement
 class LCR < Mutator
@@ -13,7 +13,7 @@ class LCR < Mutator
 	end
 
 	def doMutate(node)
-		if ['and', '&&'].includes? node.location.operator.source
+		if ['and', '&&'].include? node.location.operator.source
 			replace node.location.operator, '||'
 		else 
 			replace node.location.operator, '&&'

@@ -1,7 +1,8 @@
-require '../mutator'
+require_relative '../mutator'
 
 class OR < Mutator
-	@ops, @rep
+	@ops
+	@rep
 
 	def getReplacement(op)
 		reps = @rep[op]
@@ -10,7 +11,7 @@ class OR < Mutator
 	end
 
 	def on_send(node)
-		if ops.include? node.loc.selector.source
+		if @ops.include? node.loc.selector.source
 			work(node)
 		end
 		super
