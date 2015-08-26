@@ -1,8 +1,8 @@
-require_relative '../mutator'
+require_relative '../mutation_operator'
 
 #RNOR Range Operator Replacement
 
-class RNOR < Mutator
+class RNOR < MutationOperator
 	def on_irange(node)
 		work(node)
 		super

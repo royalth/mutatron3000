@@ -1,6 +1,6 @@
-require_relative '../mutator'
+require_relative '../mutation_operator'
 
-class OR < Mutator
+class OR < MutationOperator
 	@ops
 	@rep
 

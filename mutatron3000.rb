@@ -1,4 +1,4 @@
-require_relative 'mutatron'
+require_relative 'src/mutation_component'
 
 class Mutatron3000 
 	@mutation_operators
@@ -7,7 +7,6 @@ class Mutatron3000
 	
 	def run(filename, testsuite_name)
 		@mutation_operators = [ 'BNR', 'AOR', 'NOD', 'ROR', 'LCR', 'DFR', 'EOR', 'RNOR' ]
-		#@mutation_operators = [ 'BNR' ]
 		@filename 			= filename
 		@testsuite_name 	= testsuite_name
 		create_mutants
@@ -18,7 +17,7 @@ class Mutatron3000
 	
 	def create_mutants
 		@mutation_operators.each do | op | 
-			mutatron = Mutatron.new(@filename, op)
+			mutatron = MutationComponent.new(@filename, op)
 			mutated = mutatron.mutate
 
 			File.open( mutant_filename(op), 'w') {|f| f.write(mutated) }
@@ -46,6 +45,8 @@ class Mutatron3000
 			
 			test_output = `ruby #{@testsuite_name} --runner console --verbose=progress`
 			failed_tests = test_output.chomp.split('').count('F')
+			
+			print " " + test_output 
 			
 			if failed_tests > 0
 				killed += 1
@@ -83,7 +84,7 @@ end
 filename 		= ARGV[0]
 testsuite_name	= ARGV[1]
 if filename == nil || testsuite_name == nil
-	puts "Usage: ruby main.rb <filename> <testsuite_name>"
+	puts "Usage: ruby mutatron3000.rb <path to tested file> <path to testsuite>"
 	exit
 end
 

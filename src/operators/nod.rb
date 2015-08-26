@@ -1,7 +1,7 @@
-require_relative '../mutator'
+require_relative '../mutation_operator'
 
 #NOD Negation Operator Deletion
-class NOD < Mutator
+class NOD < MutationOperator
 	def on_send(node)
 		if ['not', '!'].include? node.loc.selector.source
 			work(node)

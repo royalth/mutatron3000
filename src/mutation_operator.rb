@@ -1,6 +1,6 @@
 require 'parser/current'
 
-class Mutator < Parser::Rewriter 
+class MutationOperator < Parser::Rewriter 
 	@instanceCounter
 	@mutationMode
 	def initialize

@@ -1,8 +1,8 @@
-require_relative '../mutator'
+require_relative '../mutation_operator'
 
 #DFR Dangerous Function Replacement
 
-class DFR < Mutator
+class DFR < MutationOperator
 	def on_send(node)
 		src = node.loc.selector.source
 		if src[src.length-1] == '!'

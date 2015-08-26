@@ -1,8 +1,8 @@
-require_relative '../mutator'
+require_relative '../mutation_operator'
 
 #EOR Equality Operator Replacement
 
-class EOR < Mutator
+class EOR < MutationOperator
 	def on_send(node)
 		if ['eql?', 'equals?'].include? node.loc.selector.source
 			work(node)

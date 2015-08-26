@@ -1,7 +1,7 @@
-require_relative '../mutator'
+require_relative '../mutation_operator'
 
 #LCR Logical Connector Replacement
-class LCR < Mutator
+class LCR < MutationOperator
 	def on_and(node)
 		work(node)
 		super

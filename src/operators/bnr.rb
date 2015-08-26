@@ -1,8 +1,8 @@
-require_relative '../mutator'
+require_relative '../mutation_operator'
 
 # BNR Break Next Replacement
 
-class BNR < Mutator
+class BNR < MutationOperator
 	def on_break(node)
 		work(node)
 		super
