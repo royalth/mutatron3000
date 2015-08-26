@@ -22,7 +22,7 @@ class A
 		res = 0;
 		for i in a..b
 			if (i == 5 && a > 1)
-				next;
+				break;
 			end 
 			res += 1
 		end

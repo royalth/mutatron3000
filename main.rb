@@ -7,7 +7,7 @@ class Mutatron3000
 	
 	def run(filename, testsuite_name)
 		#@mutation_operators = [ 'BNR', 'AOR', 'NOD', 'ROR', 'LCR', 'DFR', 'EOR', 'RNOR' ]
-		@mutation_operators = [ 'AOR' ]
+		@mutation_operators = [ 'BNR' ]
 		@filename 			= filename
 		@testsuite_name 	= testsuite_name
 		create_mutants
@@ -35,8 +35,9 @@ class Mutatron3000
 		@mutation_operators.each do | op | 
 			File.rename(mutant_filename(op), @filename)
 			
-			test_output = exec "ruby #{@testsuite_name} --runner console --verbose=progress"
+			test_output = `ruby #{@testsuite_name} --runner console --verbose=progress`
 			failed_tests = test_output.chomp.split('').count('F')
+			
 			puts mutant_filename(op)
 			if failed_tests > 0
 				killed += 1
@@ -47,6 +48,8 @@ class Mutatron3000
 			
 			File.rename(@filename, mutant_filename(op))
 		end
+		
+		File.rename(@filename + '.bak', @filename)
 		
 		puts "Mutant testing completed. Mutants killed: #{killed}."
 	end
