@@ -6,8 +6,7 @@ class Mutatron3000
 	@testsuite_name
 	
 	def run(filename, testsuite_name)
-		#@mutation_operators = [ 'BNR', 'AOR', 'NOD', 'ROR', 'LCR', 'DFR', 'EOR', 'RNOR' ]
-		@mutation_operators = [ 'BNR' ]
+		@mutation_operators = [ 'BNR', 'AOR', 'NOD', 'ROR', 'LCR', 'DFR', 'EOR', 'RNOR' ]
 		@filename 			= filename
 		@testsuite_name 	= testsuite_name
 		create_mutants
@@ -31,19 +30,28 @@ class Mutatron3000
 		# zmień nazwę pliku na *.bak
 		File.rename(@filename, @filename + '.bak')
 
-		killed = 0;
+		killed = 0
+		errors = 0
+		identical = 0
 		@mutation_operators.each do | op | 
+			print mutant_filename(op)
+			
+			if mutant_identical(op)
+				identical += 1
+				puts " IDENTICAL TO ORIGINAL (excluded from testing)"
+				return
+			end
+		
 			File.rename(mutant_filename(op), @filename)
 			
 			test_output = `ruby #{@testsuite_name} --runner console --verbose=progress`
 			failed_tests = test_output.chomp.split('').count('F')
 			
-			puts mutant_filename(op)
 			if failed_tests > 0
 				killed += 1
-				puts "KILLED"
+				puts " KILLED"
 			else 
-				puts "ALIVE"
+				puts " ALIVE"
 			end
 			
 			File.rename(@filename, mutant_filename(op))
@@ -51,7 +59,19 @@ class Mutatron3000
 		
 		File.rename(@filename + '.bak', @filename)
 		
-		puts "Mutant testing completed. Mutants killed: #{killed}."
+		puts "Mutant testing completed."
+		puts "	Mutants killed: #{killed}."
+		puts "	Mutants identical to the original: #{identical}."
+	end
+	
+	def mutant_identical(op)
+		original = File.open(@filename, "r")
+		original_content = original.read
+		original.close
+		mutant = File.open(mutant_filename, "r")
+		mutant_content = mutant.read
+		mutant.close
+		return original_content == mutant_content
 	end
 	
 	def mutant_filename(op)

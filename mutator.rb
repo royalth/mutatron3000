@@ -13,6 +13,11 @@ class Mutator < Parser::Rewriter
 	def switchMode 
 		@mutationMode = true
 		random = Random.new
+		
+		if (@instanceCounter < 1)
+			return
+		end 
+		
 		@instanceCounter = random.rand(@instanceCounter)
 		@instanceCounter += 1
 	end
