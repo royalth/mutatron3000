@@ -7,6 +7,7 @@ class Mutatron3000
 	
 	def run(filename, testsuite_name)
 		@mutation_operators = [ 'BNR', 'AOR', 'NOD', 'ROR', 'LCR', 'DFR', 'EOR', 'RNOR' ]
+		#@mutation_operators = [ 'BNR' ]
 		@filename 			= filename
 		@testsuite_name 	= testsuite_name
 		create_mutants
@@ -27,7 +28,6 @@ class Mutatron3000
 	end
 	
 	def test_mutants 
-		# zmień nazwę pliku na *.bak
 		File.rename(@filename, @filename + '.bak')
 
 		killed = 0
@@ -39,7 +39,7 @@ class Mutatron3000
 			if mutant_identical(op)
 				identical += 1
 				puts " IDENTICAL TO ORIGINAL (excluded from testing)"
-				return
+				next
 			end
 		
 			File.rename(mutant_filename(op), @filename)
@@ -65,10 +65,10 @@ class Mutatron3000
 	end
 	
 	def mutant_identical(op)
-		original = File.open(@filename, "r")
+		original = File.open(@filename + '.bak', "r")
 		original_content = original.read
 		original.close
-		mutant = File.open(mutant_filename, "r")
+		mutant = File.open(mutant_filename(op), "r")
 		mutant_content = mutant.read
 		mutant.close
 		return original_content == mutant_content
@@ -89,13 +89,3 @@ end
 
 mutatron3000 = Mutatron3000.new
 mutatron3000.run(filename, testsuite_name)
-
-
-# dla każdego mutanta (iteracja po mutation_operators)
-#zmień jego nazwę na główna nazwę 
-# zapusć testy
-# jeśli chociaż jeden fail - zabity
-# wypisz ze zabity
-#zmień nazwę z powrotem
-
-#zmień nazwę mutatrona i mutatora
