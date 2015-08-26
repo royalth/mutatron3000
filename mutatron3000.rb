@@ -43,7 +43,12 @@ class Mutatron3000
 		
 			File.rename(mutant_filename(op), @filename)
 			
-			test_output = `ruby #{@testsuite_name} --runner console --verbose=progress`
+			begin 
+				test_output = `ruby #{@testsuite_name} --runner console --verbose=progress`
+			rescue Exception 
+				puts "WYJĄTEK"
+			end
+			
 			failed_tests = test_output.chomp.split('').count('F')
 			
 			print " " + test_output.strip
