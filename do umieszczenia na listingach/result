@@ -1,0 +1,14 @@
+Mutants generation completed. Mutants generated: 8
+tested_program/code1.rb_BNR ....F KILLED
+tested_program/code1.rb_AOR ..F.. KILLED
+tested_program/code1.rb_NOD .F... KILLED
+tested_program/code1.rb_ROR .F... KILLED
+tested_program/code1.rb_LCR ....F KILLED
+tested_program/code1.rb_DFR .F... KILLED
+tested_program/code1.rb_EOR IDENTICAL TO ORIGINAL (excluded from testing)
+tested_program/code1.rb_RNOR ..... ALIVE
+Mutant testing completed.
+	Mutants killed: 6.
+	Mutants identical to the original: 1.
+
+rnor jest identyczny, bo pętla a..b nigdy nie dochodzi do końca dla takich danych testowych, więc nie ma znaczenia czy jest wyłącznie czy włącznie z b

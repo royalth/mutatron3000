@@ -40,7 +40,7 @@ class A
 	end
 	
 	def func4(a, b)
-		while !b or a == 0 
+		while !b or a != 0 
 			@var1 += 3 
 			a -= 1
 			b = !b

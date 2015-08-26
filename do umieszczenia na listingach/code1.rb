@@ -21,7 +21,7 @@ class A
 	def func2(a, b)
 		res = 0;
 		for i in a..b
-			if (i == 4 || a > 1)
+			if (i == 4 && a > 1)
 				break;
 			end 
 			res += 1
@@ -40,12 +40,12 @@ class A
 	end
 	
 	def func4(a, b)
-		while !b && a > 0
-			if (a < 5)
-				@var1 = 4
+		while !b or a == 0 
+			@var1 += 3 
+			a -= 1
+			b = !b
+			if a < 0 
 				break
-			else 
-				a -= 1
 			end
 		end
 	end

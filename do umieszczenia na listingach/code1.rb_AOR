@@ -14,13 +14,13 @@ class A
 		if (a >= b) 
 			@var1 = @var1 * (a / b)
 		else 
-			@var1 = @var1 ** (b % a)
+			@var1 = @var1 * (b % a)
 		end
 	end
 	
 	def func2(a, b)
 		res = 0;
-		for i in a...b
+		for i in a..b
 			if (i == 4 && a > 1)
 				break;
 			end 
@@ -40,12 +40,12 @@ class A
 	end
 	
 	def func4(a, b)
-		while !b && a > 0
-			if (a < 5)
-				@var1 = 4
+		while !b or a == 0 
+			@var1 += 3 
+			a -= 1
+			b = !b
+			if a < 0 
 				break
-			else 
-				a -= 1
 			end
 		end
 	end

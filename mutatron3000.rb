@@ -46,7 +46,7 @@ class Mutatron3000
 			test_output = `ruby #{@testsuite_name} --runner console --verbose=progress`
 			failed_tests = test_output.chomp.split('').count('F')
 			
-			print " " + test_output 
+			print " " + test_output.strip
 			
 			if failed_tests > 0
 				killed += 1

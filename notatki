@@ -1,0 +1,19 @@
+- dorobić schemat co robi co, np to robi drzewo, to robi mutację
+- przykład krok po kroku, prosty
+
+spis treści
+1. wstęp: cel pracy i co zostąło zrealizowane 2 strony + nazwa MUTATRON3000
+2. state of art: na czym się opierałam (teoria testowania mutacyjnego, o Ruby, inne narzędzia, ast) - mogą być 2 rozdziały  		
+3. Operatory mutacyjne dla języka Ruby 																	
+4. projekt i implementacja MUTATRONU3000, tutaj też o tym jak doprowadzałam do działania, jak go testowałam; 
+	diagram czynności jak to działa (klasa MutationOperator), tutaj wykorzystane narzędzia
+5. przykłady działania - listingi kodu: z A przemutowało na B; tu może być ten jeden krok po kroku przykład najpierw 
+	(odwołać się do ogólnego schematu działania/diagramu czynności)
+6. wnioski i uwagi końcowe
+7. bibliografia
+8. dodatki? np wykaz skrótów, słownik
+
+to co ja zrobiłam (3,4,5,6,7,8) min 70% objętości pracy w sumie
+nie ma standardu formatowania
+przed 28.08 podrzucić całość pod drzwi/do sekretariatu, pewnie się umówimy na 2.09 kiedy jest egzamin
+numerować listingi wg rozdziału, rysunki też
