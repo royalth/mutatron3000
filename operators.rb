@@ -15,11 +15,9 @@ require_relative 'operators/lcr'
 
 #DFR Dangerous Function Replacement				+
 require_relative 'operators/dfr'
-# tylko usuwanie wykrzykników
 
 #EOR Equality Operator Replacement				+
 require_relative 'operators/eor'
-#nie jest pełen
 
 #RNOR Range Operator Replacement				+
 require_relative 'operators/rnor'

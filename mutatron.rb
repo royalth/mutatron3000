@@ -14,3 +14,4 @@ class Mutatron
 		return @mutator.mutation(@buffer, @ast)
 	end
 end
+
