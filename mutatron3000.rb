@@ -9,11 +9,30 @@ class Mutatron3000
 		@mutation_operators = [ 'BNR', 'AOR', 'NOD', 'ROR', 'LCR', 'DFR', 'EOR', 'RNOR' ]
 		@filename 			= filename
 		@testsuite_name 	= testsuite_name
+		
+		if !test_original
+			return
+		end
+			
 		create_mutants
 		test_mutants
 	end
 	
 	private 
+	
+	def test_original
+		test_output = `ruby #{@testsuite_name} --runner console --verbose=progress`
+		failed_tests = test_output.chomp.split('').count('F')
+		puts "Testing original program."
+		if failed_tests > 0
+			puts test_output
+			puts "Original program failed tests. Correct program and/or tests before mutation testing."
+			return false 
+		else 
+			puts "Original program passed tests. Continuing to mutation testing."
+			return true
+		end
+	end
 	
 	def create_mutants
 		@mutation_operators.each do | op | 
@@ -27,6 +46,8 @@ class Mutatron3000
 	end
 	
 	def test_mutants 
+		puts "Testing mutants:"
+	
 		File.rename(@filename, @filename + '.bak')
 
 		killed = 0
@@ -43,11 +64,7 @@ class Mutatron3000
 		
 			File.rename(mutant_filename(op), @filename)
 			
-			begin 
-				test_output = `ruby #{@testsuite_name} --runner console --verbose=progress`
-			rescue Exception 
-				puts "WYJĄTEK"
-			end
+			test_output = `ruby #{@testsuite_name} --runner console --verbose=progress`
 			
 			failed_tests = test_output.chomp.split('').count('F')
 			
