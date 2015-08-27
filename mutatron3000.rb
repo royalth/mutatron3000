@@ -67,7 +67,12 @@ class Mutatron3000
 		
 		puts "Mutant testing completed."
 		puts "	Mutants killed: #{killed}."
+		puts "	Mutants alive: #{@mutation_operators.size - killed - identical}."
 		puts "	Mutants identical to the original: #{identical}."
+		if @mutation_operators.size - identical != 0
+			percent = 100*killed.to_f/( @mutation_operators.size - identical)
+			puts "	Test effectiveness: #{percent.round(4)}%."
+		end
 	end
 	
 	def mutant_identical(op)
